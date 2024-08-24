@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-home.css') }}">
+</head>
+<body>
+    <!-- Logo centralizada -->
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.JPEG') }}" alt="Logo Image" id="logo-image">
+    </div>
+
+    <!-- Opções de Testes -->
+    <div class="options">
+        <h1>Escolha um tipo de teste para correção</h1>
+        <ul class="options-menu">
+            <li><a href="{{ url_for('inteligencia') }}">Testes de Inteligência</a></li>
+            <li><a href="{{ url_for('atencao') }}">Testes de Atenção</a></li>
+        </ul>
+    </div>
+
+    <!-- Texto e Instagram na parte inferior -->
+    <footer>
+        <p>Sistema desenvolvido por Arlindo Neto e Carlos</p>
+        <p>
+            <a href="https://www.instagram.com/neto.darllin" target="_blank">
+                <img src="{{ url_for('static', filename='images/instagram-icon.svg') }}" alt="Instagram Icon" id="instagram-icon">
+                @neto.darllin
+            </a>
+        </p>
+    </footer>
+</body>
+</html>

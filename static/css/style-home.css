@@ -1,0 +1,114 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0); /* Gradiente suave de fundo */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease-in-out; /* Animação de aparição suave */
+}
+
+.logo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra mais profunda */
+}
+
+.options {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco translúcido */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 40px;
+    animation: slideUp 1.5s ease-out; /* Animação de deslize */
+}
+
+.options h1 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.options-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.options-menu li {
+    margin: 20px 0;
+}
+
+.options-menu a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    display: inline-block;
+}
+
+.options-menu a:hover {
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4); /* Sombra azul ao passar o mouse */
+    transform: translateY(-5px); /* Elevação ao passar o mouse */
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    animation: fadeIn 3s ease-in-out; /* Animação de aparição suave */
+}
+
+footer p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+#instagram-icon {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

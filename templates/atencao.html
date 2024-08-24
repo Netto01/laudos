@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes de Atenção</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-atencao.css') }}">
+</head>
+<body>
+    <!-- Menu de navegação -->
+    <nav class="navbar">
+        <ul class="navbar-menu">
+            <li><a href="{{ url_for('home') }}">Página Inicial</a></li>
+            <li><a href="{{ url_for('inteligencia') }}">Testes de Inteligência</a></li>
+            <li><a href="{{ url_for('atencao') }}">Testes de Atenção</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Conteúdo da página de atenção -->
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.JPEG') }}" alt="Logo Image" id="logo-image">
+        </div>
+        <h1>Testes de Atenção</h1>
+
+        <!-- Formulário para selecionar o tipo de teste de atenção -->
+        <form id="attention-form" method="POST" enctype="multipart/form-data" onsubmit="showLoadingSpinner(event)">
+            <div class="form-group">
+                <label for="test-select">Escolha o teste de atenção:</label>
+                <select id="test-select" name="attention-test" onchange="toggleTestOptions(); checkFormCompletion();">
+                    <option value="" disabled selected>Selecione um teste</option>
+                    <option value="bpa-2">BPA-2</option>
+                    <option value="tealt">TEALT</option>
+                    <option value="teadi">TEADI</option>
+                    <option value="teaco">TEACO</option>
+                </select>
+            </div>
+
+            <!-- Campos adicionais para o teste BPA-2 (tipos de atenção) -->
+            <div id="bpa-options" class="form-group" style="display: none;">
+                <label for="attention-type">Tipo de Atenção:</label>
+                <select id="attention-type" name="attention-type" onchange="checkFormCompletion();">
+                    <option value="" disabled selected>Selecione o tipo de atenção</option>
+                    <option value="concentrada">Atenção Concentrada</option>
+                    <option value="dividida">Atenção Dividida</option>
+                    <option value="alternada">Atenção Alternada</option>
+                </select>
+            </div>
+
+            <!-- Campo para upload de arquivo -->
+            <div class="form-group">
+                <label for="file-upload">Envie o arquivo (JPEG somente):</label>
+                <input type="file" id="file-upload" name="file-upload" accept=".jpeg, .jpg" onchange="checkFormCompletion();">
+            </div>
+
+            <!-- Botão de Enviar -->
+            <button type="submit" id="submit-btn" class="disabled" disabled>
+                <span id="submit-text">Enviar</span>
+                <span class="loading-spinner" style="display: none;">
+                    <iframe src="https://giphy.com/embed/VseXvvxwowwCc" width="40" height="40" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                </span>
+            </button>
+        </form>
+
+        <!-- Div para exibir os resultados após o envio -->
+        <div id="result-display" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+            <h2>Resultado da Correção:</h2>
+            <p id="selected-test-name"></p> <!-- O nome do teste selecionado e tipo de atenção será exibido aqui -->
+            <p id="result-correct"></p>
+            <p id="result-incorrect"></p>
+            <p id="result-omissions"></p>
+            <p id="result-total"></p>
+        </div>
+
+        <p class="warning">Após a correção, o arquivo será deletado, fazendo com que nenhum arquivo que é feito o upload fique armazenado. 😄<br>Somente arquivos JPEG são aceitos para upload.</p>
+        
+        <footer>
+            <p>Sistema desenvolvido por Arlindo Neto</p>
+            <p>
+                <a href="https://www.instagram.com/neto.darllin" target="_blank">
+                    <img src="{{ url_for('static', filename='images/instagram-icon.svg') }}" alt="Instagram Icon" id="instagram-icon">
+                    @neto.darllin
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Vinculando o arquivo JavaScript externo -->
+    <script src="{{ url_for('static', filename='js/atencao.js') }}"></script>
+</body>
+</html>

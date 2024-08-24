@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes de Inteligência</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-intelligence.css') }}">
+</head>
+<body>
+    <!-- Menu de navegação -->
+    <nav class="navbar">
+        <ul class="navbar-menu">
+            <li><a href="{{ url_for('home') }}">Página Inicial</a></li>
+            <li><a href="{{ url_for('inteligencia') }}">Testes de Inteligência</a></li>
+            <li><a href="{{ url_for('atencao') }}">Testes de Atenção</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.JPEG') }}" alt="Logo Image" id="logo-image">
+        </div>
+        <h1>Testes de Inteligência</h1>
+        <form method="POST" enctype="multipart/form-data" onsubmit="showLoadingSpinner()">
+            <!-- Campo de seleção de teste -->
+            <div class="form-group">
+                <label for="test-select">Escolha o teste de inteligência:</label>
+                <select id="test-select" name="intelligence-test" onchange="toggleTestOptions(); checkFormCompletion();">
+                    <option value="" disabled selected>Selecione um teste</option>
+                    <option value="wais">WAIS</option>
+                    <option value="wisc">WISC</option>
+                    <option value="ravens">Raven's Matrices</option>
+                </select>
+            </div>
+
+            <!-- Campos para datas (visíveis apenas para WISC) -->
+            <div id="date-fields" class="form-group" style="display: none;">
+                <label for="data-inicio">Data de Início de Aplicação:</label>
+                <input type="date" id="data-inicio" name="data-inicio" onchange="checkFormCompletion(); calculateAge();">
+            </div>
+            <div id="date-fields" class="form-group" style="display: none;">
+                <label for="data-nascimento">Data de Nascimento:</label>
+                <input type="date" id="data-nascimento" name="data-nascimento" onchange="checkFormCompletion(); calculateAge();">
+            </div>
+
+            <!-- Campo para exibir a idade calculada -->
+            <div id="age-display" class="form-group" style="display: none;">
+                <label for="idade">Idade Calculada:</label>
+                <input type="text" id="idade" name="idade" readonly>
+            </div>
+
+            <!-- Tabela de Subtestes (visível apenas para WISC) -->
+            <div id="subtest-table" class="form-group" style="display: none;">
+                <table id="subtestes" class="subtestes-table">
+                    <thead>
+                        <tr>
+                            <th>Subtestes</th>
+                            <th>Pontos Brutos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cubos (CB)</td>
+                            <td><input type="number" name="cubos" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Semelhanças (SM)</td>
+                            <td><input type="number" name="semelhancas" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Dígitos (DG)</td>
+                            <td><input type="number" name="digitos" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Conceitos Figurativos (CN)</td>
+                            <td><input type="number" name="conceitos_figurativos" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Códigos (CD)</td>
+                            <td><input type="number" name="codigos" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Vocabulário (VC)</td>
+                            <td><input type="number" name="vocabulario" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Seq. de Números e Letras (SNL)</td>
+                            <td><input type="number" name="seq_numeros_letras" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Raciocínio Matricial (RM)</td>
+                            <td><input type="number" name="raciocinio_matricial" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Compreensão (CO)</td>
+                            <td><input type="number" name="compreensao" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Procurar Símbolos (PS)</td>
+                            <td><input type="number" name="procurar_simbolos" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Completar Figuras (CF)</td>
+                            <td><input type="number" name="completar_figuras" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Cancelamento (CA)</td>
+                            <td><input type="number" name="cancelamento" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Informação (IN)</td>
+                            <td><input type="number" name="informacao" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Aritmética (AR)</td>
+                            <td><input type="number" name="aritmetica" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                        <tr>
+                            <td>Raciocínio com Palavras (RP)</td>
+                            <td><input type="number" name="raciocinio_palavras" min="0" onchange="checkFormCompletion();"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Botão de Enviar -->
+            <button type="submit" id="submit-btn" class="disabled" disabled>
+                <span id="submit-text">Enviar</span>
+                <span class="loading-spinner">
+                    <iframe src="https://giphy.com/embed/VseXvvxwowwCc" width="40" height="40" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                </span>
+            </button>
+        </form>
+        
+        <!-- Mensagem após a submissão -->
+        <div id="result-display" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+            <h2>Resultado da Correção:</h2>
+            <p id="selected-test-name"></p>
+            <p id="result-correct"></p>
+            <p id="result-incorrect"></p>
+            <p id="result-omissions"></p>
+            <p id="result-total"></p>
+        </div>
+
+        <p class="warning">Após a correção, o arquivo será deletado, fazendo com que nenhum arquivo que é feito o upload fique armazenado. 😄<br>Somente arquivos JPEG são aceitos para upload.</p>
+        
+        <footer>
+            <p>Sistema desenvolvido por Arlindo Neto</p>
+            <p>
+                <a href="https://www.instagram.com/neto.darllin" target="_blank">
+                    <img src="{{ url_for('static', filename='images/instagram-icon.svg') }}" alt="Instagram Icon" id="instagram-icon">
+                    @neto.darllin
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Vinculando o arquivo JavaScript externo -->
+    <script src="{{ url_for('static', filename='js/intelligence.js') }}"></script>
+
+    <!-- Script para alternar a visibilidade da tabela, campos de data e calcular idade -->
+    <script>
+        function toggleTestOptions() {
+            var testSelect = document.getElementById('test-select');
+            var dateFields = document.querySelectorAll('#date-fields');
+            var subtestTable = document.getElementById('subtest-table');
+            var ageDisplay = document.getElementById('age-display');
+
+            if (testSelect.value === 'wisc') {
+                dateFields.forEach(function(field) {
+                    field.style.display = 'block';
+                });
+                subtestTable.style.display = 'block';
+                ageDisplay.style.display = 'block';
+            } else {
+                dateFields.forEach(function(field) {
+                    field.style.display = 'none';
+                });
+                subtestTable.style.display = 'none';
+                ageDisplay.style.display = 'none';
+            }
+
+            checkFormCompletion(); // Verificar preenchimento do formulário ao mudar a seleção
+        }
+
+        function checkFormCompletion() {
+            var testSelect = document.getElementById('test-select').value;
+            var dataInicio = document.getElementById('data-inicio').value;
+            var dataNascimento = document.getElementById('data-nascimento').value;
+            var inputs = document.querySelectorAll('#subtestes input[type="number"]');
+            var submitBtn = document.getElementById('submit-btn');
+
+            var allFilled = true;
+
+            if (testSelect === 'wisc') {
+                if (!dataInicio || !dataNascimento) {
+                    allFilled = false;
+                }
+
+                inputs.forEach(function(input) {
+                    if (input.value === '') {
+                        allFilled = false;
+                    }
+                });
+            }
+
+            if (allFilled) {
+                submitBtn.classList.remove('disabled');
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.classList.add('disabled');
+                submitBtn.disabled = true;
+            }
+        }
+
+        function calculateAge() {
+            var dataNascimento = document.getElementById('data-nascimento').value;
+            var dataInicio = document.getElementById('data-inicio').value;
+            var idadeField = document.getElementById('idade');
+
+            if (dataNascimento && dataInicio) {
+                var nascimento = new Date(dataNascimento);
+                var inicio = new Date(dataInicio);
+
+                var anos = inicio.getFullYear() - nascimento.getFullYear();
+                var meses = inicio.getMonth() - nascimento.getMonth();
+
+                if (meses < 0) {
+                    anos--;
+                    meses += 12;
+                }
+
+                idadeField.value = anos + " anos e " + meses + " meses";
+            } else {
+                idadeField.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

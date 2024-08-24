@@ -1,0 +1,225 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 16px;
+    transition: color 0.3s, transform 0.3s;
+    position: relative;
+}
+
+.navbar-menu a:hover {
+    color: #007bff;
+    transform: scale(1.1); /* Aumenta ligeiramente o texto ao passar o mouse */
+}
+
+.navbar-menu a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.navbar-menu a:hover::after {
+    transform: scaleX(1); /* Efeito de sublinhado ao passar o mouse */
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    margin: 80px 0 20px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+select, input[type="file"] {
+    padding: 10px;
+    font-size: 14px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#submit-btn {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin: 10px auto 0;
+    position: relative;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+#submit-btn.disabled {
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: not-allowed;
+}
+
+#submit-btn:hover:not(.disabled) {
+    background-color: #000000;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#submit-btn.loading .loading-spinner {
+    display: block;
+}
+
+#submit-btn.loading #submit-text {
+    visibility: hidden;
+}
+
+.warning {
+    font-size: 14px;
+    color: #ff0000;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#result-display {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#result-display h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#result-display p {
+    font-size: 16px;
+    color: #666;
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+    color: #333;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+#instagram-icon {
+    width: 20px;
+    height: 20px;
+}
