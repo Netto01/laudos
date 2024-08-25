@@ -1,0 +1,177 @@
+/* Estilos Globais */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px; /* Espaço para o navbar */
+    margin-bottom: 20px;
+}
+
+.logo img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Container do Formulário */
+.container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animação de Fade-In */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Estilo do Título */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Linha Decorativa abaixo do Título */
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #007bff;
+    margin: 10px auto 20px;
+    border-radius: 2px;
+}
+
+/* Estilos do Formulário */
+.form-group {
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="number"] {
+    padding: 12px;
+    font-size: 14px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.2);
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Botão de Envio */
+input[type="submit"] {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin: 20px auto 0;
+    position: relative;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+input[type="submit"]::before {
+    content: '🚀';
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    padding: 10px 0;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+#instagram-icon {
+    width: 20px;
+    height: 20px;
+}
