@@ -1,3 +1,10 @@
-int numero = print("digite um numero: ")
+from flask import Flask, render_template
 
-print (numero)
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('RAVLT.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)

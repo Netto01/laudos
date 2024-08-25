@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário RAVLT</title>
-    <link rel="stylesheet" href="style-RAVLT.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style-RAVLT.css') }}">
 </head>
 <body>
 
     <h1>Formulário do Teste RAVLT</h1>
-    <form>
+    <form method="POST" action="URL_DO_SCRIPT_DO_GOOGLE">
         
         <div class="form-group">
             <label for="idade">Idade:</label>
