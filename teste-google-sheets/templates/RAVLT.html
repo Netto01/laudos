@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<body>
-
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAVLT - Teste Auditivo Verbal de Rey</title>
     <!-- Incluindo o CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style-RAVLT.css') }}">
-
-
+</head>
+<body>
 
     <!-- Logo -->
     <div class="logo">
@@ -15,61 +18,67 @@
     <!-- Container do Formulário -->
     <div class="container">
         <h1>RAVLT - Teste Auditivo Verbal de Rey</h1>
-        <form method="POST" action="URL_DO_SCRIPT_DO_GOOGLE">
-            <div class="form-group">
-                <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" required>
+        <form id="dataForm" class="container m-4 pl-4" method="POST">
+            <!-- Linha de Formulário -->
+            <div class="form-row">
+                <div class="form-group half">
+                    <label for="idade">Idade:</label>
+                    <input type="number" id="idade" name="idade" required>
+                </div>
+
+                <div class="form-group half">
+                    <label for="a1">A1:</label>
+                    <input type="text" id="a1" name="a1">
+                </div>
+
+                <div class="form-group half">
+                    <label for="a2">A2:</label>
+                    <input type="text" id="a2" name="a2">
+                </div>
+
+                <div class="form-group half">
+                    <label for="a3">A3:</label>
+                    <input type="text" id="a3" name="a3">
+                </div>
+
+                <div class="form-group half">
+                    <label for="a4">A4:</label>
+                    <input type="text" id="a4" name="a4">
+                </div>
+
+                <div class="form-group half">
+                    <label for="a5">A5:</label>
+                    <input type="text" id="a5" name="a5">
+                </div>
+
+                <div class="form-group half">
+                    <label for="b1">B1:</label>
+                    <input type="text" id="b1" name="b1">
+                </div>
+
+                <div class="form-group half">
+                    <label for="a6">A6:</label>
+                    <input type="text" id="a6" name="a6">
+                </div>
+
+                <div class="form-group half">
+                    <label for="a7">A7:</label>
+                    <input type="text" id="a7" name="a7">
+                </div>
+
+                <div class="form-group">
+                    <label for="reconhecimento">Reconhecimento:</label>
+                    <input type="text" id="reconhecimento" name="reconhecimento">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="a1">A1:</label>
-                <input type="text" id="a1" name="a1">
-            </div>
-            
-            <div class="form-group">
-                <label for="a2">A2:</label>
-                <input type="text" id="a2" name="a2">
-            </div>
-
-            <div class="form-group">
-                <label for="a3">A3:</label>
-                <input type="text" id="a3" name="a3">
-            </div>
-
-            <div class="form-group">
-                <label for="a4">A4:</label>
-                <input type="text" id="a4" name="a4">
-            </div>
-
-            <div class="form-group">
-                <label for="a5">A5:</label>
-                <input type="text" id="a5" name="a5">
-            </div>
-
-            <div class="form-group">
-                <label for="b1">B1:</label>
-                <input type="text" id="b1" name="b1">
-            </div>
-
-            <div class="form-group">
-                <label for="a6">A6:</label>
-                <input type="text" id="a6" name="a6">
-            </div>
-
-            <div class="form-group">
-                <label for="a7">A7:</label>
-                <input type="text" id="a7" name="a7">
-            </div>
-
-            <div class="form-group">
-                <label for="reconhecimento">Reconhecimento:</label>
-                <input type="text" id="reconhecimento" name="reconhecimento">
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Enviar">
+                <input type="submit" value="Enviar" class="button is-primary" id="submit-button">
             </div>
         </form>
+
+        <!-- Mensagem de status -->
+        <div id="message" style="display: none; margin: 20px; font-weight: bold; color: green; padding: 8px; background-color: beige; border-radius: 4px; border-color: aquamarine;"></div>
     </div>
 
     <!-- Footer -->
@@ -80,6 +89,67 @@
             @neto.darllin
         </a>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("dataForm").addEventListener("submit", function (e) {
+                e.preventDefault(); // Previne o envio padrão do formulário
+
+                let messageElement = document.getElementById("message");
+                messageElement.textContent = "Enviando...";
+                messageElement.style.display = "block";
+                document.getElementById("submit-button").disabled = true;
+
+                // Coleta os dados do formulário
+                var formData = new FormData(this);
+                var keyValuePairs = [];
+                for (var pair of formData.entries()) {
+                    keyValuePairs.push(encodeURIComponent(pair[0]) + "=" + encodeURIComponent(pair[1]));
+                }
+
+                var formDataString = keyValuePairs.join("&");
+
+                // Envia uma solicitação POST para o Google Apps Script
+                fetch("https://script.google.com/macros/s/AKfycbxmCAyYV38nkiWZjmnylqAo_eMYYwEx-ZR1ptfTrb3rsoHR-nGqzDwfAs5Z4vGFJr3K/exec", {
+                    redirect: "follow",
+                    method: "POST",
+                    body: formDataString,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+                    },
+                })
+                .then(function (response) {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error("Falha ao enviar o formulário. Status: " + response.status);
+                    }
+                })
+                .then(function (data) {
+                    messageElement.textContent = "Dados enviados com sucesso!";
+                    messageElement.style.display = "block";
+                    messageElement.style.backgroundColor = "green";
+                    messageElement.style.color = "beige";
+                    document.getElementById("submit-button").disabled = false;
+                    document.getElementById("dataForm").reset();
+
+                    setTimeout(function () {
+                        messageElement.textContent = "";
+                        messageElement.style.display = "none";
+                    }, 2600);
+                })
+                .catch(function (error) {
+                    console.error("Erro ao enviar o formulário:", error);
+                    messageElement.textContent = "Ocorreu um erro ao enviar o formulário.";
+                    messageElement.style.display = "block";
+                    messageElement.style.backgroundColor = "red";
+                    messageElement.style.color = "white";
+                    document.getElementById("submit-button").disabled = false;
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
