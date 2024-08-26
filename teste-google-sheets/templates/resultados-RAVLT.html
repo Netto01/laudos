@@ -5,9 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados RAVLT</title>
+    <!-- Incluindo o CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style-resultados-RAVLT.css') }}">
 </head>
 <body>
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.JPEG') }}" alt="Logo">
+    </div>
 
     <!-- Container da Tabela de Resultados -->
     <div class="container">
@@ -109,6 +115,15 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Sistema desenvolvido por Arlindo Neto e Carlos.</p>
+        <a href="https://www.instagram.com/neto.darllin" target="_blank">
+            <img src="{{ url_for('static', filename='images/instagram-icon.svg') }}" alt="Instagram Icon" id="instagram-icon">
+            @neto.darllin
+        </a>
+    </footer>
 
 </body>
 </html>
