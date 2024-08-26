@@ -1,12 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("JavaScript carregado e pronto!");
-
     document.getElementById("dataForm").addEventListener("submit", function (e) {
         e.preventDefault(); // Previne o envio padrão do formulário
 
-        console.log("Formulário enviado!");
-
-        // Exibe uma mensagem de status
         let messageElement = document.getElementById("message");
         messageElement.textContent = "Enviando...";
         messageElement.style.display = "block";
@@ -38,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
         .then(function (data) {
-            console.log("Dados recebidos:", data);
             messageElement.textContent = "Dados enviados com sucesso!";
             messageElement.style.display = "block";
             messageElement.style.backgroundColor = "green";
@@ -46,10 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("submit-button").disabled = false;
             document.getElementById("dataForm").reset();
 
-            setTimeout(function () {
-                messageElement.textContent = "";
-                messageElement.style.display = "none";
-            }, 2600);
+            // Redireciona para a rota Flask de resultados após o envio
+            window.location.href = "/resultados";
         })
         .catch(function (error) {
             console.error("Erro ao enviar o formulário:", error);
